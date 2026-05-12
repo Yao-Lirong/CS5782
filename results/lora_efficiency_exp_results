@@ -1,0 +1,373 @@
+Epoch 1
+Average train loss: 0.1626
+Eval result: {'accuracy': 0.9403669724770642}
+
+Epoch 2
+Average train loss: 0.1490
+Eval result: {'accuracy': 0.926605504587156}
+
+Epoch 3
+Average train loss: 0.1406
+Eval result: {'accuracy': 0.9311926605504587}
+
+Epoch 4
+Average train loss: 0.1324
+Eval result: {'accuracy': 0.9369266055045872}
+
+Epoch 5
+Average train loss: 0.1254
+Eval result: {'accuracy': 0.9403669724770642}
+
+Epoch 6
+Average train loss: 0.1194
+Eval result: {'accuracy': 0.9334862385321101}
+
+Epoch 7
+Average train loss: 0.1153
+Eval result: {'accuracy': 0.9472477064220184}
+
+Epoch 8
+Average train loss: 0.1114
+Eval result: {'accuracy': 0.930045871559633}
+
+Epoch 9
+Average train loss: 0.1069
+Eval result: {'accuracy': 0.9461009174311926}
+
+Epoch 10
+Average train loss: 0.1006
+Eval result: {'accuracy': 0.9403669724770642}
+
+Epoch 11
+Average train loss: 0.0989
+Eval result: {'accuracy': 0.944954128440367}
+
+Epoch 12
+Average train loss: 0.0947
+Eval result: {'accuracy': 0.9357798165137615}
+
+Epoch 13
+Average train loss: 0.0911
+Eval result: {'accuracy': 0.9472477064220184}
+
+Epoch 14
+Average train loss: 0.0898
+Eval result: {'accuracy': 0.9380733944954128}
+
+Epoch 15
+Average train loss: 0.0870
+Eval result: {'accuracy': 0.9438073394495413}
+
+Epoch 16
+Average train loss: 0.0813
+Eval result: {'accuracy': 0.9506880733944955}
+
+Epoch 17
+Average train loss: 0.0809
+Eval result: {'accuracy': 0.9461009174311926}
+
+Epoch 18
+Average train loss: 0.0779
+Eval result: {'accuracy': 0.9357798165137615}
+
+Epoch 19
+Average train loss: 0.0729
+Eval result: {'accuracy': 0.9380733944954128}
+
+Epoch 20
+Average train loss: 0.0710
+Eval result: {'accuracy': 0.9380733944954128}
+
+Epoch 21
+Average train loss: 0.0706
+Eval result: {'accuracy': 0.9357798165137615}
+
+Epoch 22
+Average train loss: 0.0692
+Eval result: {'accuracy': 0.9346330275229358}
+
+Epoch 23
+Average train loss: 0.0653
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 24
+Average train loss: 0.0636
+Eval result: {'accuracy': 0.9346330275229358}
+
+Epoch 25
+Average train loss: 0.0625
+Eval result: {'accuracy': 0.9380733944954128}
+
+Epoch 26
+Average train loss: 0.0594
+Eval result: {'accuracy': 0.9369266055045872}
+
+Epoch 27
+Average train loss: 0.0579
+Eval result: {'accuracy': 0.9403669724770642}
+
+Epoch 28
+Average train loss: 0.0567
+Eval result: {'accuracy': 0.9380733944954128}
+
+Epoch 29
+Average train loss: 0.0541
+Eval result: {'accuracy': 0.944954128440367}
+
+Epoch 30
+Average train loss: 0.0515
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 31
+Average train loss: 0.0492
+Eval result: {'accuracy': 0.9288990825688074}
+
+Epoch 32
+Average train loss: 0.0491
+Eval result: {'accuracy': 0.9392201834862385}
+
+Epoch 33
+Average train loss: 0.0460
+Eval result: {'accuracy': 0.9403669724770642}
+
+Epoch 34
+Average train loss: 0.0449
+Eval result: {'accuracy': 0.9461009174311926}
+
+Epoch 35
+Average train loss: 0.0445
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 36
+Average train loss: 0.0420
+Eval result: {'accuracy': 0.9472477064220184}
+
+Epoch 37
+Average train loss: 0.0387
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 38
+Average train loss: 0.0388
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 39
+Average train loss: 0.0355
+Eval result: {'accuracy': 0.9461009174311926}
+
+Epoch 40
+Average train loss: 0.0362
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 41
+Average train loss: 0.0362
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 42
+Average train loss: 0.0331
+Eval result: {'accuracy': 0.9403669724770642}
+
+Epoch 43
+Average train loss: 0.0307
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 44
+Average train loss: 0.0306
+Eval result: {'accuracy': 0.944954128440367}
+
+Epoch 45
+Average train loss: 0.0290
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 46
+Average train loss: 0.0279
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 47
+Average train loss: 0.0277
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 48
+Average train loss: 0.0270
+Eval result: {'accuracy': 0.9438073394495413}
+
+Epoch 49
+Average train loss: 0.0242
+Eval result: {'accuracy': 0.944954128440367}
+
+Epoch 50
+Average train loss: 0.0240
+Eval result: {'accuracy': 0.944954128440367}
+
+Epoch 51
+Average train loss: 0.0231
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 52
+Average train loss: 0.0224
+Eval result: {'accuracy': 0.9415137614678899}
+
+Epoch 53
+Average train loss: 0.0217
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 54
+Average train loss: 0.0214
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 55
+Average train loss: 0.0198
+Eval result: {'accuracy': 0.9426605504587156}
+
+Epoch 56
+Average train loss: 0.0199
+Eval result: {'accuracy': 0.9438073394495413}
+
+Epoch 57
+Average train loss: 0.0196
+Eval result: {'accuracy': 0.9438073394495413}
+
+Epoch 58
+Average train loss: 0.0194
+Eval result: {'accuracy': 0.9438073394495413}
+
+Epoch 59
+Average train loss: 0.0193
+Eval result: {'accuracy': 0.9438073394495413}
+
+Epoch 60
+Average train loss: 0.0196
+Eval result: {'accuracy': 0.9438073394495413} 
+Epoch 1 (MRPC)
+Average train loss: 0.6302
+Eval result: {'accuracy': 0.7377450980392157, 'f1': 0.833592534992224}
+
+Epoch 2 (MRPC)
+Average train loss: 0.4886
+Eval result: {'accuracy': 0.8284313725490197, 'f1': 0.8767605633802817}
+
+Epoch 3 (MRPC)
+Average train loss: 0.3592
+Eval result: {'accuracy': 0.8602941176470589, 'f1': 0.8980322003577818}
+
+Epoch 4 (MRPC)
+Average train loss: 0.3205
+Eval result: {'accuracy': 0.8602941176470589, 'f1': 0.8998242530755711}
+
+Epoch 5 (MRPC)
+Average train loss: 0.2823
+Eval result: {'accuracy': 0.8651960784313726, 'f1': 0.9001814882032668}
+
+Epoch 6 (MRPC)
+Average train loss: 0.2370
+Eval result: {'accuracy': 0.8553921568627451, 'f1': 0.8984509466437177}
+
+Epoch 7 (MRPC)
+Average train loss: 0.2119
+Eval result: {'accuracy': 0.8676470588235294, 'f1': 0.9049295774647887}
+
+Epoch 8 (MRPC)
+Average train loss: 0.1790
+Eval result: {'accuracy': 0.8627450980392157, 'f1': 0.9054054054054054}
+
+Epoch 9 (MRPC)
+Average train loss: 0.1502
+Eval result: {'accuracy': 0.8651960784313726, 'f1': 0.9066213921901528}
+
+Epoch 10 (MRPC)
+Average train loss: 0.1253
+Eval result: {'accuracy': 0.8774509803921569, 'f1': 0.911660777385159}
+
+Epoch 11 (MRPC)
+Average train loss: 0.1166
+Eval result: {'accuracy': 0.8799019607843137, 'f1': 0.9138840070298769}
+
+Epoch 12 (MRPC)
+Average train loss: 0.0800
+Eval result: {'accuracy': 0.8848039215686274, 'f1': 0.9168141592920354}
+
+Epoch 13 (MRPC)
+Average train loss: 0.1008
+Eval result: {'accuracy': 0.8651960784313726, 'f1': 0.9043478260869565}
+
+Epoch 14 (MRPC)
+Average train loss: 0.0686
+Eval result: {'accuracy': 0.875, 'f1': 0.9106830122591943}
+
+Epoch 15 (MRPC)
+Average train loss: 0.0642
+Eval result: {'accuracy': 0.8700980392156863, 'f1': 0.9078260869565218}
+
+Epoch 16 (MRPC)
+Average train loss: 0.0671
+Eval result: {'accuracy': 0.8725490196078431, 'f1': 0.9103448275862069}
+
+Epoch 17 (MRPC)
+Average train loss: 0.0533
+Eval result: {'accuracy': 0.8700980392156863, 'f1': 0.9051878354203936}
+
+Epoch 18 (MRPC)
+Average train loss: 0.0431
+Eval result: {'accuracy': 0.875, 'f1': 0.906764168190128}
+
+Epoch 19 (MRPC)
+Average train loss: 0.0383
+Eval result: {'accuracy': 0.8848039215686274, 'f1': 0.9179755671902269}
+
+Epoch 20 (MRPC)
+Average train loss: 0.0442
+Eval result: {'accuracy': 0.8676470588235294, 'f1': 0.906896551724138}
+
+Epoch 21 (MRPC)
+Average train loss: 0.0327
+Eval result: {'accuracy': 0.8872549019607843, 'f1': 0.9190140845070423}
+
+Epoch 22 (MRPC)
+Average train loss: 0.0299
+Eval result: {'accuracy': 0.8700980392156863, 'f1': 0.9075043630017452}
+
+Epoch 23 (MRPC)
+Average train loss: 0.0278
+Eval result: {'accuracy': 0.875, 'f1': 0.9119170984455959}
+
+Epoch 24 (MRPC)
+Average train loss: 0.0206
+Eval result: {'accuracy': 0.8725490196078431, 'f1': 0.9087719298245615}
+
+Epoch 25 (MRPC)
+Average train loss: 0.0234
+Eval result: {'accuracy': 0.875, 'f1': 0.9084380610412927}
+
+Epoch 26 (MRPC)
+Average train loss: 0.0285
+Eval result: {'accuracy': 0.875, 'f1': 0.9109947643979057}
+
+Epoch 27 (MRPC)
+Average train loss: 0.0174
+Eval result: {'accuracy': 0.875, 'f1': 0.9106830122591943}
+
+Epoch 28 (MRPC)
+Average train loss: 0.0162
+Eval result: {'accuracy': 0.8823529411764706, 'f1': 0.9145907473309609}
+
+Epoch 29 (MRPC)
+Average train loss: 0.0150
+Eval result: {'accuracy': 0.8774509803921569, 'f1': 0.9107142857142857}
+
+Epoch 30 (MRPC)
+Average train loss: 0.0171
+Eval result: {'accuracy': 0.8823529411764706, 'f1': 0.9145907473309609} 
+Epoch 1 | GPT-2 Average Train Loss: 0.5895
+GPT-2 LoRA BLEU Score: BLEU = 65.81 92.1/75.9/59.5/45.1 (BP = 1.000 ratio = 1.001 hyp_len = 3993 ref_len = 3989)
+
+Epoch 2 | GPT-2 Average Train Loss: 0.4007
+GPT-2 LoRA BLEU Score: BLEU = 66.22 93.1/77.3/60.0/45.1 (BP = 0.997 ratio = 0.997 hyp_len = 4106 ref_len = 4119)
+
+Epoch 3 | GPT-2 Average Train Loss: 0.3793
+GPT-2 LoRA BLEU Score: BLEU = 65.46 91.1/75.6/59.0/45.2 (BP = 1.000 ratio = 1.010 hyp_len = 4293 ref_len = 4249)
+
+Epoch 4 | GPT-2 Average Train Loss: 0.3680
+GPT-2 LoRA BLEU Score: BLEU = 64.59 89.4/73.9/58.3/45.2 (BP = 1.000 ratio = 1.027 hyp_len = 4481 ref_len = 4362)
+
+Epoch 5 | GPT-2 Average Train Loss: 0.3599
+GPT-2 LoRA BLEU Score: BLEU = 65.88 90.4/74.8/59.3/47.0 (BP = 1.000 ratio = 1.023 hyp_len = 4406 ref_len = 4309) 
+
