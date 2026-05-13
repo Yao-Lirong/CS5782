@@ -6,9 +6,7 @@ This repo is a **CS5782 course re-implementation** of *LoRA: Low-Rank Adaptation
 
 ## 2. Chosen result
 
-We reproduce whether **LoRA nears full fine-tuning with a tiny trainable budget** (paper **Tables 2–3, 9–11**) and whether **rank / target-module choices** matter at fixed budget (spirit of **Table 5**, originally on GPT-3). **Figure:** rank–target sweep on RoBERTa (this repo).
-
-![Rank sensitivity — RoBERTa GLUE](results/rank_sensitivity_roberta.png)
+We reproduce whether **LoRA nears full fine-tuning with a tiny trainable budget** (paper **Tables 2–3, 9–11**) and whether **rank / target-module choices** matter at fixed budget (spirit of **Table 5**, originally on GPT-3). The rank-sensitivity figure for our RoBERTa runs is shown in **§6**.
 
 ## 3. GitHub contents
 
@@ -26,7 +24,7 @@ Top-level **write-ups:** `README.md` (this file), `CS5782 Final Report.md` (full
 
 **`data/`** — no checked-in corpora; `data/README.md` documents how experiments pull **GLUE** and **E2E** through Hugging Face `datasets` (Hub / URLs).
 
-**`poster/`** — course poster PDF (`Copy of lora_poster_mod.pdf`).
+**`poster/`** — course poster PDF 
 
 ## 4. Re-implementation details
 
@@ -44,9 +42,11 @@ pip install torch transformers datasets evaluate accelerate tqdm numpy sacrebleu
 
 ## 6. Results / insights
 
-**Versus the paper (same trainable-parameter scale).** On **RoBERTa-base + LoRA (~0.3M params)**, Hu et al. report SST-2 **95.1±0.2** and MRPC **89.7±0.7** (Table 2); our run reached **95.1** / **88.7** (report **Table 1**)—SST-2 matches the paper mean; MRPC is a bit below their central value. On **GPT-2 Medium + LoRA (~0.35M params)** on E2E, the paper reports **70.4±0.1** BLEU (Table 3); ours was **65.88** (report **Table 2**)—same *ranking story* vs full fine-tuning in our logs, but not the same absolute BLEU. **Rank / target modules:** our RoBERTa SST-2 sweep puts **Q+V** first and **Q+K+V+O** second (report **Figure 1** / `results/rank_sensitivity_roberta.png`), consistent with the paper’s **Table 5** takeaway that query–value (and full-attention) placements are strong defaults.
+**Versus the paper (same trainable-parameter scale).** On **RoBERTa-base + LoRA (~0.3M params)**, Hu et al. report SST-2 **95.1±0.2** and MRPC **89.7±0.7** (Table 2); our run reached **95.1** / **88.7** (report **Table 1**)—SST-2 matches the paper mean; MRPC is a bit below their central value. On **GPT-2 Medium + LoRA (~0.35M params)** on E2E, the paper reports **70.4±0.1** BLEU (Table 3); ours was **65.88** (report **Table 2**)—same *ranking story* vs full fine-tuning in our logs, but not the same absolute BLEU. **Rank / target modules:** our RoBERTa SST-2 sweep puts **Q+V** first and **Q+K+V+O** second (report **Figure 1**), consistent with the paper’s **Table 5** takeaway that query–value (and full-attention) placements are strong defaults.
 
-**What you should expect as the end-result of using this GitHub repo.** After you run the code in §5, you should **not** expect every metric to match the PDF exactly. You **should** expect: **(i)** training artifacts—metrics traces and JSON-style logs from the helpers in `code/`; **(ii)** **RoBERTa GLUE** accuracies **near** the paper’s LoRA row on SST-2, with MRPC more swingy across seeds; **(iii)** **GPT-2 E2E** runs where LoRA clearly trains but **BLEU can lag** the paper’s **70.4±0.1** by several points unless you average runs or tune further; **(iv)** a **rank / target-module sweep** (numbers plus `results/rank_sensitivity_roberta.png`) you can read against the paper’s Table 5 narrative. **Bottom line:** a **small, end-to-end reproduction harness** that recovers the paper’s **qualitative conclusions** (LoRA efficiency, Q+V / full-attention placements) more reliably than every **quantitative** NLG target.
+![Rank sensitivity — RoBERTa GLUE](results/rank_sensitivity_roberta.png)
+
+**What you should expect from this repo.** After §5 you get **JSON/metric logs**, **RoBERTa GLUE** numbers close to the paper’s LoRA row on SST-2 (MRPC varies more by seed), **GPT-2 E2E** where LoRA trains but **BLEU often trails ~70.4** without extra runs/tuning, and a **rank/target sweep** (table + figure above). **Not** a bit-for-bit PDF match—especially E2E—**but** a runnable harness for the paper’s **qualitative** takeaways (efficient LoRA, Q+V / full-attention placements).
 
 ## 7. Conclusion
 
