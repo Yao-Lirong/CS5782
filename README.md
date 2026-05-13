@@ -1,41 +1,44 @@
-# CS5782 — LoRA experiments
+# CS5782 — LoRA Re-implementation
 
-This repository contains notebooks and scripts for LoRA efficiency and rank-sensitivity experiments (RoBERTa on GLUE, GPT-2 on E2E NLG). The code under `code/` loads data programmatically; you do not need to hand-place GLUE files unless you want an offline mirror.
+## 1. Introduction
 
-## Obtaining the datasets
+This repo is a **CS5782 course re-implementation** of *LoRA: Low-Rank Adaptation of Large Language Models* (Hu et al., 2021): we rerun key experiments to check the paper’s claims under limited compute. **LoRA** freezes pretrained weights and trains small **low-rank adapters** in selected layers so adaptation uses far fewer parameters than full fine-tuning while staying competitive on NLU/NLG.
 
-### GLUE: SST-2 and MRPC
+## 2. Chosen result
 
-The experiments use the [GLUE benchmark](https://gluebenchmark.com/) tasks **SST-2** and **MRPC** via the Hugging Face [`datasets`](https://huggingface.co/docs/datasets) library:
+We reproduce whether **LoRA nears full fine-tuning with a tiny trainable budget** (paper **Tables 2–3, 9–11**) and whether **rank / target-module choices** matter at fixed budget (spirit of **Table 5**, originally on GPT-3). **Figure:** rank–target sweep on RoBERTa (this repo).
 
-```python
-from datasets import load_dataset
+![Rank sensitivity — RoBERTa GLUE](results/rank_sensitivity_roberta.png)
 
-sst2 = load_dataset("glue", "sst2")
-mrpc = load_dataset("glue", "mrpc")
+## 3. GitHub contents
+
+**`code/`** — notebooks + `.py` exports: RoBERTa GLUE LoRA vs FT (`lora_efficiency_roberta_glue_sst2_mrpc`), RoBERTa rank/target sweep (`lora_rank_sensitivity_roberta_glue`), GPT-2 E2E (`lora_efficiency_gpt2_e2e`). **`results/`** — logs/plots. **`data/`** — only notes (data load via Hugging Face). **`poster/`** — poster PDF.
+
+## 4. Re-implementation details
+
+**Setup:** `roberta-base` on GLUE **SST-2** & **MRPC**; **`gpt2-medium`** on **E2E NLG**; metrics = **accuracy** / **BLEU**; stack = PyTorch, `transformers`, `datasets`, `evaluate`, `accelerate`, **sacrebleu** (E2E). **Changes:** paper used **multi V100**; we used **one Colab A100** and a ~24–28h budget—narrower scope, same hyperparameter tables where listed. Scripts are **Colab exports** (see below). Encoder **RoBERTa** tests whether Table-5-style **Q+V vs Q+K+V+O** guidance transfers from the paper’s decoder GPT-3 setting.
+
+## 5. Reproduction steps
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install torch transformers datasets evaluate accelerate tqdm numpy sacrebleu
 ```
 
-On first use, `datasets` downloads and caches the prepared GLUE splits from the Hugging Face Hub. Ensure you have internet access for that first run (and enough disk space for the cache). The default cache location follows Hugging Face conventions; you can override it with the environment variable `HF_HOME` (or `HF_DATASETS_CACHE` for dataset files only). If you are on a restricted network, configure your environment for Hub access (for example proxy or mirror settings documented by Hugging Face).
+**GPU:** CUDA strongly recommended (we used **1× A100**). **Run:** open `code/*.ipynb` or the matching `.py`; **comment out** `google.colab` / `drive.mount` for local use. **No CLI flags**—edit in-file hyperparameters (match paper **Table 9** / **Table 11**). Data: `load_dataset("glue", ...)` and E2E CSV URLs as in `data/README.md`.
 
-No separate registration is required for these public GLUE configurations beyond normal Hub usage.
+## 6. Results / insights
 
-### E2E NLG Challenge
+**RoBERTa:** LoRA (~**0.3M** params) matched paper-scale SST-2; MRPC slightly below paper mean (see report **Table 1**). **GPT-2 E2E:** our LoRA BLEU **~65.9** vs paper **70.4±0.1**; NLG runs were noisier. **Rank sweep:** **Q+V** best, **Q+K+V+O** second on SST-2—aligned with the paper’s engineering takeaway.
 
-The GPT-2 / NLG experiments use the **E2E NLG Challenge** data (CSV with `mr` and `ref` columns). The notebooks load the official CSVs over HTTPS, for example:
+## 7. Conclusion
 
-- Train: `https://github.com/tuetschek/e2e-dataset/raw/master/trainset.csv`
-- Validation: `https://github.com/tuetschek/e2e-dataset/raw/master/devset.csv`
+LoRA’s **parameter efficiency vs accuracy** story reproduced most cleanly on **GLUE**; **NLG** needed more runs/seeds to match published BLEU. **Lesson:** fixed paper hyperparameters carry classification well; generation may need extra tuning or averaging.
 
-With `datasets`, that matches:
+## 8. References
 
-```python
-from datasets import load_dataset
+Hu et al. (2021). *LoRA: Low-rank adaptation of large language models.* https://arxiv.org/abs/2106.09685 · Wang et al. (2018). *GLUE.* · E2E NLG dataset (Tuetschek et al., via URLs in code) · Hugging Face docs for `transformers` / `datasets` / `evaluate` / `accelerate`.
 
-data_files = {
-    "train": "https://github.com/tuetschek/e2e-dataset/raw/master/trainset.csv",
-    "validation": "https://github.com/tuetschek/e2e-dataset/raw/master/devset.csv",
-}
-e2e = load_dataset("csv", data_files=data_files)
-```
+## 9. Acknowledgements
 
-For a fully offline workflow, clone or download the repository [tuetschek/e2e-dataset](https://github.com/tuetschek/e2e-dataset) and point `data_files` to local paths (for example `data/e2e/trainset.csv` and `data/e2e/devset.csv`). Respect the dataset’s license and citation requirements stated in that project.
+Project for **CS5782** (graded coursework). **Group:** Lirong Yao, Laurence Yang, Haoyu Yan, Yaxi Zeng.
