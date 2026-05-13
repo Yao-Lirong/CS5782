@@ -2,17 +2,18 @@
 
 ## 1. Introduction
 
-This repo is a **CS5782 course re-implementation** of *LoRA: Low-Rank Adaptation of Large Language Models* (Hu et al., 2021): we rerun key experiments to check the paper’s claims under limited compute. **LoRA** freezes pretrained weights and trains small **low-rank adapters** in selected layers so adaptation uses far fewer parameters than full fine-tuning while staying competitive on NLU/NLG.
+- **What this repo is:** a **CS5782** course **re-implementation** of *LoRA: Low-Rank Adaptation of Large Language Models* (Hu et al., 2021)—we rerun a focused set of experiments to test the paper’s claims with limited compute.
+- **What LoRA does:** **freezes** pretrained weights and trains small **low-rank adapters** in selected Transformer layers so task adaptation updates **far fewer parameters** than full fine-tuning while staying competitive on NLU/NLG.
 
 ## 2. Chosen result
 
-We reproduce whether **LoRA nears full fine-tuning with a tiny trainable budget** (paper **Tables 2–3, 9–11**) and whether **rank / target-module choices** matter at fixed budget (spirit of **Table 5**, originally on GPT-3). The rank-sensitivity figure for our RoBERTa runs is shown in **§6**.
+- **Efficiency vs full FT:** check whether **LoRA** matches **full fine-tuning** at a **tiny trainable budget** (paper **Tables 2–3**, hyperparams **9–11**).
+- **Rank / where to attach LoRA:** check whether **target-module choice** matters at **fixed parameter budget** (same spirit as **Table 5**, originally on **GPT-3**).
 
 ## 3. GitHub contents
 
-Top-level **write-ups:** `README.md` (this file), `CS5782 Final Report.md` (full write-up; may be large if figures are embedded).
-
-**`code/`** — all runnable experiments (Jupyter + Colab-exported Python). Each pair shares the same logic; prefer notebooks for interactive runs.
+- **Top-level docs:** `README.md` (this file); `CS5782 Final Report.md` (full report; can be large if figures are embedded).
+- **`code/`** — notebooks + Colab-exported `.py`; each `.ipynb` / `.py` pair shares logic (notebooks are easiest for interactive runs).
 
 | File | Description |
 |------|-------------|
@@ -20,19 +21,23 @@ Top-level **write-ups:** `README.md` (this file), `CS5782 Final Report.md` (full
 | `lora_rank_sensitivity_roberta_glue.ipynb` / `.py` | RoBERTa on GLUE **SST-2**: sweep **LoRA rank** and **target modules** (Q / K / V / O and combinations) at comparable trainable-parameter budgets; produces sensitivity plots/metrics. |
 | `lora_efficiency_gpt2_e2e.ipynb` / `.py` | **GPT-2 Medium** on the **E2E NLG** data-to-text task: LoRA vs full fine-tuning; **BLEU** vs references. |
 
-**`results/`** — committed outputs from runs (e.g. `rank_sensitivity_roberta.png`, text logs such as `lora_efficiency_exp_results`); safe to regenerate by re-running `code/`.
-
-**`data/`** — no checked-in corpora; `data/README.md` documents how experiments pull **GLUE** and **E2E** through Hugging Face `datasets` (Hub / URLs).
-
-**`poster/`** — course poster PDF 
+- **`results/`** — saved runs (e.g. `rank_sensitivity_roberta.png`, `lora_efficiency_exp_results`); regenerate by re-running `code/`.
+- **`data/`** — no checked-in corpora; see `data/README.md` for **GLUE** / **E2E** loading via Hugging Face `datasets`.
+- **`poster/`** — course poster PDF (`Copy of lora_poster_mod.pdf`).
 
 ## 4. Re-implementation details
 
-**Setup:** `roberta-base` on GLUE **SST-2** & **MRPC**; **`gpt2-medium`** on **E2E NLG**; metrics = **accuracy** / **BLEU**; stack = PyTorch, `transformers`, `datasets`, `evaluate`, `accelerate`, **sacrebleu** (E2E). **Changes:** paper used **multi V100**; we used **one Colab A100** and a ~24–28h budget—narrower scope, same hyperparameter tables where listed. Scripts are **Colab exports** (see below). Encoder **RoBERTa** tests whether Table-5-style **Q+V vs Q+K+V+O** guidance transfers from the paper’s decoder GPT-3 setting.
+- **Models & tasks:** `roberta-base` on GLUE **SST-2** & **MRPC**; `gpt2-medium` on **E2E NLG**.
+- **Metrics:** GLUE **accuracy**; E2E **BLEU** (via **sacrebleu**).
+- **Stack:** PyTorch; Hugging Face `transformers`, `datasets`, `evaluate`, `accelerate`.
+- **Compute vs paper:** they used **multi V100**; we used **one Colab A100** and ~**24–28h** total—narrower scope, same hyperparameter **tables** where we could (**9** / **11**).
+- **Code shape:** `.py` files are **Colab exports** (may include `drive.mount`—strip for local; see **§5**).
+- **Extra angle:** **encoder RoBERTa** rank sweep tests whether **Table 5**-style **Q+V** vs **Q+K+V+O** advice transfers from the paper’s **decoder** GPT-3 setup.
 
 ## 5. Reproduction steps
 
-1. set up environement, including installing the following dependencies: 
+**Environment:** create a venv and install dependencies:
+
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install torch transformers datasets evaluate accelerate tqdm numpy sacrebleu
@@ -42,7 +47,11 @@ pip install torch transformers datasets evaluate accelerate tqdm numpy sacrebleu
 
 ## 6. Results / insights
 
-**Versus the paper (same trainable-parameter scale).** On **RoBERTa-base + LoRA (~0.3M params)**, Hu et al. report SST-2 **95.1±0.2** and MRPC **89.7±0.7** (Table 2); our run reached **95.1** / **88.7** (report **Table 1**)—SST-2 matches the paper mean; MRPC is a bit below their central value. On **GPT-2 Medium + LoRA (~0.35M params)** on E2E, the paper reports **70.4±0.1** BLEU (Table 3); ours was **65.88** (report **Table 2**)—same *ranking story* vs full fine-tuning in our logs, but not the same absolute BLEU. **Rank / target modules:** our RoBERTa SST-2 sweep puts **Q+V** first and **Q+K+V+O** second (report **Figure 1**), consistent with the paper’s **Table 5** takeaway that query–value (and full-attention) placements are strong defaults.
+**Compared to Hu et al. (2021)**
+
+- **RoBERTa + LoRA (~0.3M trainable):** paper **Table 2** SST-2 **95.1±0.2**, MRPC **89.7±0.7**; ours **95.1** / **88.7** (report **Table 1**)—SST-2 on mean; MRPC a bit low vs their center.
+- **GPT-2 Medium + LoRA (~0.35M) on E2E:** paper **Table 3** BLEU **70.4±0.1**; ours **65.88** (report **Table 2**)—LoRA trains, but we did not hit their absolute BLEU.
+- **Rank / target modules (RoBERTa SST-2):** **Q+V** best, **Q+K+V+O** second (report **Figure 1**)—matches **Table 5**’s message that **Q+V** and **full-attention** LoRA are strong defaults.
 
 ![Rank sensitivity — RoBERTa GLUE](results/rank_sensitivity_roberta.png)
 
