@@ -12,7 +12,21 @@ We reproduce whether **LoRA nears full fine-tuning with a tiny trainable budget*
 
 ## 3. GitHub contents
 
-**`code/`** — notebooks + `.py` exports: RoBERTa GLUE LoRA vs FT (`lora_efficiency_roberta_glue_sst2_mrpc`), RoBERTa rank/target sweep (`lora_rank_sensitivity_roberta_glue`), GPT-2 E2E (`lora_efficiency_gpt2_e2e`). **`results/`** — logs/plots. **`data/`** — only notes (data load via Hugging Face). **`poster/`** — poster PDF.
+Top-level **write-ups:** `README.md` (this file), `CS5782 Final Report.md` (full write-up; may be large if figures are embedded).
+
+**`code/`** — all runnable experiments (Jupyter + Colab-exported Python). Each pair shares the same logic; prefer notebooks for interactive runs.
+
+| File | Description |
+|------|-------------|
+| `lora_efficiency_roberta_glue_sst2_mrpc.ipynb` / `.py` | RoBERTa-base on GLUE **SST-2** and **MRPC**: LoRA vs full fine-tuning (and related baselines in-notebook), accuracy-focused. |
+| `lora_rank_sensitivity_roberta_glue.ipynb` / `.py` | RoBERTa on GLUE **SST-2**: sweep **LoRA rank** and **target modules** (Q / K / V / O and combinations) at comparable trainable-parameter budgets; produces sensitivity plots/metrics. |
+| `lora_efficiency_gpt2_e2e.ipynb` / `.py` | **GPT-2 Medium** on the **E2E NLG** data-to-text task: LoRA vs full fine-tuning; **BLEU** vs references. |
+
+**`results/`** — committed outputs from runs (e.g. `rank_sensitivity_roberta.png`, text logs such as `lora_efficiency_exp_results`); safe to regenerate by re-running `code/`.
+
+**`data/`** — no checked-in corpora; `data/README.md` documents how experiments pull **GLUE** and **E2E** through Hugging Face `datasets` (Hub / URLs).
+
+**`poster/`** — course poster PDF (`Copy of lora_poster_mod.pdf`).
 
 ## 4. Re-implementation details
 
@@ -20,6 +34,7 @@ We reproduce whether **LoRA nears full fine-tuning with a tiny trainable budget*
 
 ## 5. Reproduction steps
 
+1. set up environement, including installing the following dependencies: 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install torch transformers datasets evaluate accelerate tqdm numpy sacrebleu
@@ -29,7 +44,9 @@ pip install torch transformers datasets evaluate accelerate tqdm numpy sacrebleu
 
 ## 6. Results / insights
 
-**RoBERTa:** LoRA (~**0.3M** params) matched paper-scale SST-2; MRPC slightly below paper mean (see report **Table 1**). **GPT-2 E2E:** our LoRA BLEU **~65.9** vs paper **70.4±0.1**; NLG runs were noisier. **Rank sweep:** **Q+V** best, **Q+K+V+O** second on SST-2—aligned with the paper’s engineering takeaway.
+**Versus the paper (same trainable-parameter scale).** On **RoBERTa-base + LoRA (~0.3M params)**, Hu et al. report SST-2 **95.1±0.2** and MRPC **89.7±0.7** (Table 2); our run reached **95.1** / **88.7** (report **Table 1**)—SST-2 matches the paper mean; MRPC is a bit below their central value. On **GPT-2 Medium + LoRA (~0.35M params)** on E2E, the paper reports **70.4±0.1** BLEU (Table 3); ours was **65.88** (report **Table 2**)—same *ranking story* vs full fine-tuning in our logs, but not the same absolute BLEU. **Rank / target modules:** our RoBERTa SST-2 sweep puts **Q+V** first and **Q+K+V+O** second (report **Figure 1** / `results/rank_sensitivity_roberta.png`), consistent with the paper’s **Table 5** takeaway that query–value (and full-attention) placements are strong defaults.
+
+**What you should expect as the end-result of using this GitHub repo.** After you run the code in §5, you should **not** expect every metric to match the PDF exactly. You **should** expect: **(i)** training artifacts—metrics traces and JSON-style logs from the helpers in `code/`; **(ii)** **RoBERTa GLUE** accuracies **near** the paper’s LoRA row on SST-2, with MRPC more swingy across seeds; **(iii)** **GPT-2 E2E** runs where LoRA clearly trains but **BLEU can lag** the paper’s **70.4±0.1** by several points unless you average runs or tune further; **(iv)** a **rank / target-module sweep** (numbers plus `results/rank_sensitivity_roberta.png`) you can read against the paper’s Table 5 narrative. **Bottom line:** a **small, end-to-end reproduction harness** that recovers the paper’s **qualitative conclusions** (LoRA efficiency, Q+V / full-attention placements) more reliably than every **quantitative** NLG target.
 
 ## 7. Conclusion
 
