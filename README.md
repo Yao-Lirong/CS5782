@@ -30,7 +30,7 @@
 - **Models & tasks:** `roberta-base` on GLUE **SST-2** & **MRPC**; `gpt2-medium` on **E2E NLG**.
 - **Metrics:** GLUE **accuracy**; E2E **BLEU** (via **sacrebleu**).
 - **Stack:** PyTorch; Hugging Face `transformers`, `datasets`, `evaluate`, `accelerate`.
-- **Compute vs paper:** they used **multi V100**; we used **one Colab A100** and ~**24–28h** total—narrower scope, same hyperparameter **tables** where we could (**9** / **11**).
+- **Compute vs paper:** they used **multi V100**; we used **one Colab A100** and ~**24–28h** total—narrower scope, same hyperparameter **tables** where we could (Table **9** and Table **11** from the LoRA paper).
 - **Code shape:** `.py` files are **Colab exports** (may include `drive.mount`—strip for local; see **§5**).
 - **Extra angle:** **encoder RoBERTa** rank sweep tests whether **Table 5**-style **Q+V** vs **Q+K+V+O** advice transfers from the paper’s **decoder** GPT-3 setup.
 
