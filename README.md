@@ -63,7 +63,13 @@ LoRA’s **parameter efficiency vs accuracy** story reproduced most cleanly on *
 
 ## 8. References
 
-Hu et al. (2021). *LoRA: Low-rank adaptation of large language models.* https://arxiv.org/abs/2106.09685 · Wang et al. (2018). *GLUE.* · E2E NLG dataset (Tuetschek et al., via URLs in code) · Hugging Face docs for `transformers` / `datasets` / `evaluate` / `accelerate`.
+- Hu, Edward J., Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Liang Wang, and Weizhu Chen. "LoRA: Low-rank adaptation of large language models." *ICLR* 1, no. 2 (2022): 3. (Preprint: https://arxiv.org/abs/2106.09685)
+- Wang, Alex, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel Bowman. "GLUE: A multi-task benchmark and analysis platform for natural language understanding." In *Proceedings of the 2018 EMNLP Workshop BlackboxNLP: Analyzing and Interpreting Neural Networks for NLP*, pp. 353–355. 2018.
+- Papineni, Kishore, Salim Roukos, Todd Ward, and Wei-Jing Zhu. "BLEU: a method for automatic evaluation of machine translation." In *Proceedings of the 40th Annual Meeting of the Association for Computational Linguistics*, pp. 311–318. 2002.
+- Radford, Alec, Jeff Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. *Language Models are Unsupervised Multitask Learners.* OpenAI technical report, 2019.
+- Liu, Yinhan, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. "RoBERTa: A robustly optimized BERT pretraining approach." arXiv preprint arXiv:1907.11692 (2019).
+
+**Implementation / data (not formal bibliography):** E2E NLG Challenge data (see `data/README.md`); Hugging Face libraries `transformers`, `datasets`, `evaluate`, `accelerate`.
 
 ## 9. Acknowledgements
 
